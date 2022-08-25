@@ -1,31 +1,37 @@
 # Input String
 hexChars = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
 
-# Convert that input string to a utf-8 equivilant string 
-conversion = bytes.fromhex(hexChars).decode("utf-8")
 
-# Bruteforce search by all possible keys
+def bruteforceKey(hexInput):
 
-for key in range(128):
+    # Convert that input string to a utf-8 equivilant string 
+    conversion = bytes.fromhex(hexInput).decode("utf-8")
 
-    converted = ""
+    # Bruteforce search by all possible keys
 
-    # XOR every character with current Key
-    for character in conversion:
+    for key in range(128):
 
-        try: 
+        converted = ""
 
-            xored = int(hex(ord(character)), 16) ^ key
+        # XOR every character with current Key
+        for character in conversion:
 
-            xoredString = bytes.fromhex(hex(xored)[2:]).decode("utf-8")
+            try: 
 
-            converted = converted + str(xoredString)
+                xored = int(hex(ord(character)), 16) ^ key
 
-        except:
-            continue
+                xoredString = bytes.fromhex(hex(xored)[2:]).decode("utf-8")
+
+                converted = converted + str(xoredString)
+
+            except:
+                continue
 
 
-    # Output the decrypted message with the current key
-    
-    print(hex(key)+":")
-    print(converted+"\n")
+        # Output the decrypted message with the current key
+        
+        print(hex(key)+":")
+        print(converted+"\n")
+
+
+bruteforceKey(hexInput=hexChars)

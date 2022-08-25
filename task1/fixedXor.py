@@ -6,6 +6,4 @@ def xorHex(hexOne, hexTwo):
     result = hex(result)[2:]
     return result
 
-result = xorHex(inputString, against)
-
-print(result)
+assert xorHex(inputString, against) == "746865206b696420646f6e277420706c6179"
